@@ -2,15 +2,14 @@
 import config
 import telebot
 import time
-
+#import cv
 
 bot = telebot.TeleBot(config.token)
 
 def mes ():
         f = open('../telegram/text1.txt')
-        bot.send_message(393760322, f.read()) 
-        #bot.send_message(404956312, f.read())
-	return 0
+        bot.send_message(, f.read()) 
+        return 0
 
 mes()
 #if __name__ == '__main__':

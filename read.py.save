@@ -1,0 +1,40 @@
+#!/usr/bin/python
+import sysprint(sys.version)
+
+import MFRC522
+import signal
+import time
+import os
+ 
+continue_reading = True
+MIFAREReader = MFRC522.MFRC522()
+
+cardA = [210,125,221,43,89]
+
+def end_read(signal, frame):
+  global continue_reading
+  continue_reading = False
+  print "Ctrl+C captured, ending read."
+  MIFAREReader.GPIO_CLEEN()
+
+signal.signal(signal.SIGINT, end_read)
+
+while continue_reading:
+  (status,TagType) = MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
+  if status == MIFAREReader.MI_OK:
+    print "Card detected"
+  (status,backData) = MIFAREReader.MFRC522_Anticoll()
+  if status == MIFAREReader.MI_OK:
+    print "Card read UID: "+str(backData[0])+","+str(backData[1])+","+str(backData[2])+","+str(backData[3])+","+str(backData[4])
+    if ( backData == cardA ):
+      print "welcome"      
+      f1 = open("../telegram/text1.txt", 'wb')
+      f1.write("The")
+      if ( backData == cardA ):
+          f1.write("User with cardA is comming at $(date)")
+
+      #time.sleep(5)
+      os.system('python3 telegram.py')
+    else:
+      print "wrong Card"
+

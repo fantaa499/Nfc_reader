@@ -1,2 +1,2 @@
 # -*- coding: utf-8 -*-
-token = '' ## Впишите ваш токен Telegram-бота между кавычек
+token = '283351935:AAFNKF8i5AiCaCMjwobcArjO8dmrTrD606s' 
